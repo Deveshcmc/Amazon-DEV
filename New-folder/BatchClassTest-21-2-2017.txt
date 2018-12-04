@@ -1,0 +1,1221 @@
+  //Start Test Method BatchAmazonResearchItemsCA Class.................
+	testMethod static void test36() {
+        Account a = new Account();
+        a.Name = 'test';
+        insert a;
+            
+        Contact con = New Contact();
+        con.LastName = 'Pending';
+        con.FirstName = 'FBA Shipment';
+        Insert con;
+    
+        Amazon_Setting__c testSetting = new Amazon_Setting__c();
+        testSetting.eCommazon__Amazon_Site__c = 'CA';
+        testSetting.eCommazon__Merchant_Id__c = 'testMerchantId';
+        testSetting.eCommazon__Account__c = a.id;
+        testSetting.eCommazon__FBA_Ship_From_Address__c = con.id;
+        testSetting.Enabled__c=true;
+        insert testSetting; 
+        
+        eCommazon__Amazon_Research__c amzrsch = new eCommazon__Amazon_Research__c();
+        amzrsch.name = 'Amazon Research';
+        Insert amzrsch;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem.Name = 'Amazon Research Items';
+        amzresrchitem.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem.eCommazon__ASIN__c = 'B005GYFX3Y';
+        amzresrchitem.eCommazon__Last_Research_FBA_CA__c = System.now();
+        Insert amzresrchitem;
+        
+    String Response ='<?xml version="1.0"?>'+
+                         '<GetMatchingProductResponse  xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01">'+
+                            '<GetMatchingProductResult  ASIN="B005GYFX3Y" status="Success">'+
+                                '<Product xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01" xmlns:ns2="http://mws.amazonservices.ca/schema/Products/2011-10-01/default.xsd">'+
+                                    '<Identifiers>'+
+                                        '<MarketplaceASIN><MarketplaceId>ATVPDKIKX0DER</MarketplaceId><ASIN>B005GYFX3Y</ASIN></MarketplaceASIN>'+
+                                    '</Identifiers>'+
+                                    '<AttributeSets>'+
+                                        '<ns2:ItemAttributes xml:lang="en-US">'+
+                                            '<ns2:Binding>Lawn &amp; Patio</ns2:Binding>'+
+                                            '<ns2:Brand>MAN LAW BBQ</ns2:Brand>'+
+                                            '<ns2:Color>Silver</ns2:Color>'+
+                                            '<ns2:Feature>Grill great ribs with the durable heavy gauge stainless steel</ns2:Feature>'+
+                                            '<ns2:Feature>Rejoice for a longer lasting rack due to the metal construction with anti-rust surface</ns2:Feature>'+
+                                            '<ns2:Feature>Efficient upright design saves space and gives extra room on grill top</ns2:Feature>'+
+                                            '<ns2:Feature>Save time by grilling multiple ribs at a time; the rib rack can hold up to 7 ribs</ns2:Feature>'+
+                                            '<ns2:Feature>Non-stick coating makes grilling more convenient and cleaning easier</ns2:Feature>'+
+                                            '<ns2:ItemDimensions>'+
+                                                '<ns2:Height Units="inches">3.00</ns2:Height>'+
+                                                '<ns2:Length Units="inches">14.50</ns2:Length>'+
+                                                '<ns2:Width Units="inches">11.75</ns2:Width>'+
+                                                '<ns2:Weight Units="pounds">1.46</ns2:Weight>'+
+                                            '</ns2:ItemDimensions>'+
+                                            '<ns2:Label>Man Law</ns2:Label>'+
+                                            '<ns2:ListPrice><ns2:Amount>22.99</ns2:Amount><ns2:CurrencyCode>USD</ns2:CurrencyCode></ns2:ListPrice>'+
+                                            '<ns2:Manufacturer>Man Law</ns2:Manufacturer>'+
+                                            '<ns2:ManufacturerMinimumAge Units="months">0.0</ns2:ManufacturerMinimumAge>'+
+                                            '<ns2:MaterialType>Stainless-Steel</ns2:MaterialType>'+
+                                            '<ns2:Model>MAN-V9</ns2:Model>'+
+                                            '<ns2:NumberOfItems>1</ns2:NumberOfItems>'+
+                                            '<ns2:PackageDimensions>'+
+                                                '<ns2:Height Units="inches">3.00</ns2:Height>'+
+                                                '<ns2:Length Units="inches">14.50</ns2:Length>'+
+                                                '<ns2:Width Units="inches">10.90</ns2:Width>'+
+                                                '<ns2:Weight Units="pounds">1.50</ns2:Weight>'+
+                                            '</ns2:PackageDimensions>'+
+                                            '<ns2:PackageQuantity>1</ns2:PackageQuantity>'+
+                                            '<ns2:PartNumber>MAN-V9</ns2:PartNumber>'+
+                                            '<ns2:ProductGroup>Lawn &amp; Patio</ns2:ProductGroup>'+
+                                            '<ns2:ProductTypeName>OUTDOOR_LIVING</ns2:ProductTypeName>'+
+                                            '<ns2:Publisher>Man Law</ns2:Publisher>'+
+                                            '<ns2:SmallImage>'+
+                                                '<ns2:URL>http://ecx.images-amazon.com/images/I/41fA96OBCBL._SL75_.jpg</ns2:URL>'+
+                                                '<ns2:Height Units="pixels">43</ns2:Height>'+
+                                                '<ns2:Width Units="pixels">75</ns2:Width>'+
+                                            '</ns2:SmallImage>'+
+                                            '<ns2:Studio>Man Law</ns2:Studio>'+
+                                            '<ns2:Title>Rib Rack</ns2:Title>'+
+                                            '<ns2:Warranty>1-Year limited warranty for parts</ns2:Warranty>'+
+                                        '</ns2:ItemAttributes>'+
+                                    '</AttributeSets>'+
+                                    '<Relationships/>'+
+                                    '<SalesRankings>'+
+                                        '<SalesRank><ProductCategoryId>lawn_and_garden_display_on_website</ProductCategoryId><Rank>74660</Rank></SalesRank>'+
+                                        '<SalesRank><ProductCategoryId>home_garden_display_on_website</ProductCategoryId><Rank>310835</Rank></SalesRank>'+
+                                    '</SalesRankings>'+
+                                '</Product>'+
+                                '</GetMatchingProductResult>'+
+                              '<ResponseMetadata><RequestId>10b11aaf-8c27-4f24-b47d-752fccbea74d</RequestId></ResponseMetadata>'+
+                            '</GetMatchingProductResponse>';
+                        
+    String Response2 = '<?xml version="1.0"?>'+
+                            '<GetCompetitivePricingForASINResponse xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01">'+
+                                '<GetCompetitivePricingForASINResult ASIN="B005GYFX3Y" status="Success">'+
+                                    '<Product xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01" xmlns:ns2="http://mws.amazonservices.ca/schema/Products/2011-10-01/default.xsd">'+
+                                        '<Identifiers>'+
+                                            '<MarketplaceASIN><MarketplaceId>ATVPDKIKX0DER</MarketplaceId><ASIN>B005GYFX3Y</ASIN></MarketplaceASIN>'+
+                                        '</Identifiers>'+
+                                        '<CompetitivePricing>'+
+                                            '<CompetitivePrices>'+
+                                                '<CompetitivePrice belongsToRequester="false" condition="New" subcondition="New">'+
+                                                    '<CompetitivePriceId>1</CompetitivePriceId>'+
+                                                    '<Price>'+
+                                                        '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></LandedPrice>'+
+                                                        '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></ListingPrice>'+
+                                                        '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                                    '</Price>'+
+                                                '</CompetitivePrice>'+
+                                                '<CompetitivePrice belongsToRequester="false" condition="Used" subcondition="Mint">'+
+                                                    '<CompetitivePriceId>2</CompetitivePriceId>'+
+                                                    '<Price>'+
+                                                        '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>18.76</Amount></LandedPrice>'+
+                                                        '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>18.76</Amount></ListingPrice>'+
+                                                        '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                                    '</Price>'+
+                                                '</CompetitivePrice>'+
+                                            '</CompetitivePrices>'+
+                                            '<NumberOfOfferListings>'+
+                                                '<OfferListingCount condition="Any">11</OfferListingCount>'+
+                                                '<OfferListingCount condition="Used">1</OfferListingCount>'+
+                                                '<OfferListingCount condition="New">10</OfferListingCount>'+
+                                            '</NumberOfOfferListings>'+
+                                        '</CompetitivePricing>'+
+                                        '<SalesRankings>'+
+                                            '<SalesRank><ProductCategoryId>lawn_and_garden_display_on_website</ProductCategoryId><Rank>74660</Rank></SalesRank>'+
+                                            '<SalesRank><ProductCategoryId>home_garden_display_on_website</ProductCategoryId><Rank>310835</Rank></SalesRank>'+
+                                        '</SalesRankings>'+
+                                    '</Product>'+
+                                '</GetCompetitivePricingForASINResult>'+
+                                '<ResponseMetadata><RequestId>a0fdeeb4-e8aa-4a0d-9da8-cc215590a7cc</RequestId></ResponseMetadata>'+
+                            '</GetCompetitivePricingForASINResponse>';
+                            
+    String Response3 = '<?xml version="1.0"?>'+
+            '<GetLowestOfferListingsForASINResponse xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01">'+
+                '<GetLowestOfferListingsForASINResult ASIN="B005GYFX3Y" status="Success">'+
+                    '<AllOfferListingsConsidered>true</AllOfferListingsConsidered>'+
+                    '<Product xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01" xmlns:ns2="http://mws.amazonservices.ca/schema/Products/2011-10-01/default.xsd">'+
+                        '<Identifiers>'+
+                            '<MarketplaceASIN><MarketplaceId>ATVPDKIKX0DER</MarketplaceId><ASIN>B005GYFX3Y</ASIN></MarketplaceASIN>'+
+                        '</Identifiers>'+
+                        '<LowestOfferListings>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>New</ItemCondition>'+
+                                    '<ItemSubcondition>New</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Amazon</FulfillmentChannel>'+
+                                    '<ShipsDomestically>True</ShipsDomestically>'+
+                                    '<ShippingTime><Max>0-2 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>95-97%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>1</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>4534</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>New</ItemCondition>'+
+                                    '<ItemSubcondition>New</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Amazon</FulfillmentChannel>'+
+                                    '<ShipsDomestically>True</ShipsDomestically>'+
+                                    '<ShippingTime><Max>0-2 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>98-100%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>5</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>36240</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>Used</ItemCondition>'+
+                                    '<ItemSubcondition>Mint</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Amazon</FulfillmentChannel>'+
+                                    '<ShipsDomestically>True</ShipsDomestically>'+
+                                    '<ShippingTime><Max>0-2 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>80-89%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>1</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>2233518</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>18.76</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>18.76</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>New</ItemCondition>'+
+                                    '<ItemSubcondition>New</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Amazon</FulfillmentChannel>'+
+                                    '<ShipsDomestically>True</ShipsDomestically>'+
+                                    '<ShippingTime><Max>0-2 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>90-94%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>1</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>4851</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>19.50</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>19.50</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>New</ItemCondition>'+
+                                    '<ItemSubcondition>New</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Merchant</FulfillmentChannel>'+
+                                    '<ShipsDomestically>True</ShipsDomestically>'+
+                                    '<ShippingTime><Max>0-2 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>95-97%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>1</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>632</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>22.99</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>5.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>New</ItemCondition>'+
+                                    '<ItemSubcondition>New</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Merchant</FulfillmentChannel>'+
+                                    '<ShipsDomestically>Unknown</ShipsDomestically>'+
+                                    '<ShippingTime><Max>3-7 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>90-94%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>1</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>4504</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>23.65</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>23.65</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>New</ItemCondition>'+
+                                    '<ItemSubcondition>New</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Merchant</FulfillmentChannel>'+
+                                    '<ShipsDomestically>Unknown</ShipsDomestically>'+
+                                    '<ShippingTime><Max>8-13 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>95-97%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>1</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>10880</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>25.99</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>8.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                        '</LowestOfferListings>'+
+                    '</Product>'+
+                '</GetLowestOfferListingsForASINResult>'+
+                '<ResponseMetadata><RequestId>166adfcf-456b-4bb0-a74f-faea2230ac1a</RequestId></ResponseMetadata>'+
+            '</GetLowestOfferListingsForASINResponse>';
+        
+        List<eCommazon__Amazon_Research_Item__c> amazonResearchItemList = new List<eCommazon__Amazon_Research_Item__c>();
+       
+       	Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new MockAPI());
+		
+        database.batchablecontext bc;
+        amazonResearchItemList.add(amzresrchitem);
+        BatchAmazonResearchItemsCA bamr = new BatchAmazonResearchItemsCA();
+        bamr.AmznReserchItemList.addAll(amazonResearchItemList);
+        bamr.start(bc);
+        bamr.execute(bc, amazonResearchItemList);
+        id batchprocessOrder = Database.executebatch(bamr,5);
+        bamr.ParseGetMatchingProductResponse(Response);
+        bamr.ParsegetCompetitivePricing(Response2);
+        bamr.ParseGetLowestOfferListingsForASIN(Response3);
+        
+        Test.stopTest();
+    }
+    
+    testMethod static void test37() {
+        Account a = new Account();
+        a.Name = 'test';
+        insert a;
+            
+        Contact con = New Contact();
+        con.LastName = 'Pending';
+        con.FirstName = 'FBA Shipment';
+        Insert con;
+    
+        Amazon_Setting__c testSetting = new Amazon_Setting__c();
+        testSetting.eCommazon__Amazon_Site__c = 'CA';
+        testSetting.eCommazon__Merchant_Id__c = 'testMerchantId';
+        testSetting.eCommazon__Account__c = a.id;
+        testSetting.eCommazon__FBA_Ship_From_Address__c = con.id;
+        testSetting.Enabled__c=true;
+        insert testSetting; 
+        
+        eCommazon__Amazon_Research__c amzrsch = new eCommazon__Amazon_Research__c();
+        amzrsch.name = 'Amazon Research';
+        Insert amzrsch;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem.Name = 'Amazon Research Items';
+        amzresrchitem.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem.eCommazon__ASIN__c = 'B005GYFX3Y';
+        amzresrchitem.eCommazon__Last_Research_FBA_CA__c = System.now();
+        Insert amzresrchitem;
+        
+        String Response ='<?xml version="1.0"?>'+
+                         '<GetMatchingProductResponse  xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01">'+
+                            '<GetMatchingProductResult  ASIN="B005GYFX3Y" status="Success">'+
+                                '<Product xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01" xmlns:ns2="http://mws.amazonservices.ca/schema/Products/2011-10-01/default.xsd">'+
+                                    '<Identifiers>'+
+                                        '<MarketplaceASIN><MarketplaceId>ATVPDKIKX0DER</MarketplaceId><ASIN>B005GYFX3Y</ASIN></MarketplaceASIN>'+
+                                    '</Identifiers>'+
+                                    '<AttributeSets>'+
+                                        '<ns2:ItemAttributes xml:lang="en-US">'+
+                                            '<ns2:ItemDimensions>'+
+                                            '</ns2:ItemDimensions>'+
+                                            '<ns2:Label>Man Law</ns2:Label>'+
+                                            '<ns2:ListPrice><ns2:Amount>22.99</ns2:Amount><ns2:CurrencyCode>USD</ns2:CurrencyCode></ns2:ListPrice>'+
+                                            '<ns2:Manufacturer>Man Law</ns2:Manufacturer>'+
+                                            '<ns2:ManufacturerMinimumAge Units="months">0.0</ns2:ManufacturerMinimumAge>'+
+                                            '<ns2:MaterialType>Stainless-Steel</ns2:MaterialType>'+
+                                            '<ns2:Model>MAN-V9</ns2:Model>'+
+                                            '<ns2:NumberOfItems>1</ns2:NumberOfItems>'+
+                                            '<ns2:PackageDimensions>'+
+                                            '</ns2:PackageDimensions>'+
+                                            '<ns2:PackageQuantity>1</ns2:PackageQuantity>'+
+                                            '<ns2:PartNumber>MAN-V9</ns2:PartNumber>'+
+                                            '<ns2:ProductGroup>Lawn &amp; Patio</ns2:ProductGroup>'+
+                                            '<ns2:ProductTypeName>OUTDOOR_LIVING</ns2:ProductTypeName>'+
+                                            '<ns2:Publisher>Man Law</ns2:Publisher>'+
+                                            '<ns2:SmallImage>'+
+                                            '</ns2:SmallImage>'+
+                                            '<ns2:Studio>Man Law</ns2:Studio>'+
+                                            '<ns2:Title>Rib Rack</ns2:Title>'+
+                                            '<ns2:Warranty>1-Year limited warranty for parts</ns2:Warranty>'+
+                                        '</ns2:ItemAttributes>'+
+                                    '</AttributeSets>'+
+                                    '<Relationships/>'+
+                                    '<SalesRankings>'+
+                                    '</SalesRankings>'+
+                                '</Product>'+
+                                '</GetMatchingProductResult>'+
+                              '<ResponseMetadata><RequestId>10b11aaf-8c27-4f24-b47d-752fccbea74d</RequestId></ResponseMetadata>'+
+                            '</GetMatchingProductResponse>';
+         List<eCommazon__Amazon_Research_Item__c> amazonResearchItemList = new List<eCommazon__Amazon_Research_Item__c>();
+       
+       	Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new MockAPI());
+		
+        database.batchablecontext bc;
+        amazonResearchItemList.add(amzresrchitem);
+        BatchAmazonResearchItemsCA bamr = new BatchAmazonResearchItemsCA();
+        bamr.AmznReserchItemList.addAll(amazonResearchItemList);
+        bamr.start(bc);
+        bamr.execute(bc, amazonResearchItemList);
+        bamr.ParseGetMatchingProductResponse(Response);
+        
+        Test.stopTest();
+    }
+    
+     testMethod static void test38() {
+        Account a = new Account();
+        a.Name = 'test';
+        insert a;
+            
+        Contact con = New Contact();
+        con.LastName = 'Pending';
+        con.FirstName = 'FBA Shipment';
+        Insert con;
+    
+        Amazon_Setting__c testSetting = new Amazon_Setting__c();
+        testSetting.eCommazon__Amazon_Site__c = 'CA';
+        testSetting.eCommazon__Merchant_Id__c = 'testMerchantId';
+        testSetting.eCommazon__Account__c = a.id;
+        testSetting.eCommazon__FBA_Ship_From_Address__c = con.id;
+        testSetting.Enabled__c=true;
+        insert testSetting; 
+        
+        eCommazon__Amazon_Research__c amzrsch = new eCommazon__Amazon_Research__c();
+        amzrsch.name = 'Amazon Research';
+        Insert amzrsch;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem.Name = 'Amazon Research Items';
+        amzresrchitem.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem.eCommazon__ASIN__c = 'B005GYFX3Y';
+        //amzresrchitem.eCommazon__Last_Research_FBA_CA__c = null;
+        Insert amzresrchitem;
+        
+      
+        eCommazon__Amazon_Research_Item__c amzresrchitem2 = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem2.Name = 'Amazon Research Items';
+        amzresrchitem2.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem2.eCommazon__ASIN__c = 'B005GYFX3Y';
+        amzresrchitem2.eCommazon__Amazon_API_Research_Complete_FBA_CA__c = True;
+        Insert amzresrchitem2;
+       
+        eCommazon__Amazon_Research_Item__c amzresrchitem3 = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem3.Name = 'Amazon Research Items';
+        amzresrchitem3.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem3.eCommazon__UPC__c = 'B005GYFX3YUPC';
+        //amzresrchitem3.eCommazon__Amazon_API_Research_Complete_FBA_CA__c = True;
+        Insert amzresrchitem3;
+        
+        String Response ='<?xml version="1.0"?>'+
+                         '<GetMatchingProductResponse  xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01">'+
+                            '<GetMatchingProductResult  ASIN="B005GYFX3Y" status="Success">'+
+                                '<Product xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01" xmlns:ns2="http://mws.amazonservices.ca/schema/Products/2011-10-01/default.xsd">'+
+                                    '<Identifiers>'+
+                                        '<MarketplaceASIN><MarketplaceId>ATVPDKIKX0DER</MarketplaceId><ASIN>B005GYFX3Y</ASIN></MarketplaceASIN>'+
+                                    '</Identifiers>'+
+                                    '<AttributeSets>'+
+                                        '<ns2:ItemAttributes xml:lang="en-US">'+
+                                         '<ns2:Warranty>1-Year limited warranty for parts</ns2:Warranty>'+
+                                        '</ns2:ItemAttributes>'+
+                                    '</AttributeSets>'+
+                                '</Product>'+
+                                '</GetMatchingProductResult>'+
+                              '<ResponseMetadata><RequestId>10b11aaf-8c27-4f24-b47d-752fccbea74d</RequestId></ResponseMetadata>'+
+                            '</GetMatchingProductResponse>';
+                            
+         String Response2 ='<?xml version="1.0"?>'+
+                            '<GetMatchingProductResponse xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01"><GetMatchingProductResult ASIN="B005GYFX3Y" status="ClientError"><Error><Type>Sender</Type><Code>InvalidParameterValue</Code><Message>Invalid ASIN identifier B00VPO5XNO for marketplace ATVPDKIKX0DER</Message></Error></GetMatchingProductResult><ResponseMetadata><RequestId>0843c159-38bb-4530-8173-408c3fb2cec0</RequestId></ResponseMetadata></GetMatchingProductResponse>';
+         
+         List<eCommazon__Amazon_Research_Item__c> amazonResearchItemList = new List<eCommazon__Amazon_Research_Item__c>();
+       
+       	Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new MockAPI());
+		
+        database.batchablecontext bc;
+        amazonResearchItemList.add(amzresrchitem);
+        BatchAmazonResearchItemsCA bamr = new BatchAmazonResearchItemsCA();
+        bamr.AmazonResearchId = amzrsch.id;
+        //bamr.AmznReserchItemList.addAll(amazonResearchItemList);
+        bamr.start(bc);
+        bamr.execute(bc, amazonResearchItemList);
+        bamr.finish(bc);
+        bamr.ParseGetMatchingProductResponse(Response);
+        bamr.ParseGetMatchingProductResponse(Response2);    
+        
+        Test.stopTest();
+     }	
+     // End Test Method BatchAmazonResearchItemsCA Class.................
+     
+     //Start Test Method BatchAmazonResearchLogsCA Class.................
+     
+     testMethod static void test39() {
+        Account a = new Account();
+        a.Name = 'test';
+        insert a;
+            
+        Contact con = New Contact();
+        con.LastName = 'Pending';
+        con.FirstName = 'FBA Shipment';
+        Insert con;
+    
+        Amazon_Setting__c testSetting = new Amazon_Setting__c();
+        testSetting.eCommazon__Amazon_Site__c = 'CA';
+        testSetting.eCommazon__Merchant_Id__c = 'testMerchantId';
+        testSetting.eCommazon__Account__c = a.id;
+        testSetting.eCommazon__FBA_Ship_From_Address__c = con.id;
+        testSetting.Enabled__c=true;
+        insert testSetting; 
+        
+        eCommazon__Amazon_Research__c amzrsch = new eCommazon__Amazon_Research__c();
+        amzrsch.name = 'Amazon Research';
+        Insert amzrsch;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem.Name = 'Amazon Research Items';
+        amzresrchitem.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem.eCommazon__ASIN__c = 'B005GYFX3Y';
+        Insert amzresrchitem;
+       
+        List<eCommazon__Amazon_Research_Item__c> amazonResearchItemList = new List<eCommazon__Amazon_Research_Item__c>();
+       	
+       	Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new MockAPI());
+		
+        database.batchablecontext bc;
+        amazonResearchItemList.add(amzresrchitem);
+        BatchAmazonResearchLogsCA bamr = new BatchAmazonResearchLogsCA();
+        bamr.AmznReserchItemList.addAll(amazonResearchItemList);
+        bamr.start(bc);
+        bamr.execute(bc, amazonResearchItemList);
+        bamr.finish(bc);
+        bamr.UpdateProductInfo('This String Contains Ships from and sold by Amazon.com.',amzresrchitem);
+        bamr.UpdateProductInfo('This String Contains <span class="a-size-small mbcMerchantName">Amazon.com</span>',amzresrchitem);
+        bamr.UpdateProductInfo('This String does not Contain anything.',amzresrchitem); 
+        bamr.ProductInfo('B005GYFX3Y');
+        
+        Test.stopTest();
+    }
+    
+    testMethod static void test40() {
+        Account a = new Account();
+        a.Name = 'test';
+        insert a;
+            
+        Contact con = New Contact();
+        con.LastName = 'Pending';
+        con.FirstName = 'FBA Shipment';
+        Insert con;
+    
+        Amazon_Setting__c testSetting = new Amazon_Setting__c();
+        testSetting.eCommazon__Amazon_Site__c = 'CA';
+        testSetting.eCommazon__Merchant_Id__c = 'testMerchantId';
+        testSetting.eCommazon__Account__c = a.id;
+        testSetting.eCommazon__FBA_Ship_From_Address__c = con.id;
+        testSetting.Enabled__c=true;
+        insert testSetting; 
+        
+        eCommazon__Amazon_Research__c amzrsch = new eCommazon__Amazon_Research__c();
+        amzrsch.name = 'Amazon Research';
+        Insert amzrsch;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem.Name = 'Amazon Research Items';
+        amzresrchitem.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem.eCommazon__ASIN__c = 'B005GYFX3Y';
+        Insert amzresrchitem;
+       
+        List<eCommazon__Amazon_Research_Item__c> amazonResearchItemList = new List<eCommazon__Amazon_Research_Item__c>();
+
+		Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new MockAPI());
+		
+        database.batchablecontext bc;
+        amazonResearchItemList.add(amzresrchitem);
+        BatchAmazonResearchLogsCA bamr = new BatchAmazonResearchLogsCA();
+        bamr.AmazonResearchId = amzrsch.id;
+        bamr.start(bc);
+        bamr.finish(bc);
+        bamr.UpdateProductInfo('This String Contains Ships from and sold by Amazon.com.',amzresrchitem);
+        bamr.UpdateProductInfo('This String Contains <span class="a-size-small mbcMerchantName">Amazon.com</span>',amzresrchitem);
+        bamr.UpdateProductInfo('This String does not Contain anything.',amzresrchitem); 
+        
+        Test.stopTest();
+    }
+     //End Test Method BatchAmazonResearchLogsCA Class................. 
+     
+     //Start Test Method BatchAmazonResItemScrapingCA Class..........
+     testMethod static void test41() {
+        Account a = new Account();
+        a.Name = 'test';
+        insert a;
+            
+        Contact con = New Contact();
+        con.LastName = 'Pending';
+        con.FirstName = 'FBA Shipment';
+        Insert con;
+    
+        Amazon_Setting__c testSetting = new Amazon_Setting__c();
+        testSetting.eCommazon__Amazon_Site__c = 'CA';
+        testSetting.eCommazon__Merchant_Id__c = 'testMerchantId';
+        testSetting.eCommazon__Account__c = a.id;
+        testSetting.eCommazon__FBA_Ship_From_Address__c = con.id;
+        testSetting.Enabled__c=true;
+        insert testSetting; 
+        
+        eCommazon__Amazon_Research__c amzrsch = new eCommazon__Amazon_Research__c();
+        amzrsch.name = 'Amazon Research';
+        Insert amzrsch;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem.Name = 'Amazon Research Items';
+        amzresrchitem.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem.eCommazon__ASIN__c = 'B005GYFX3Y';
+        Insert amzresrchitem;
+       
+        List<eCommazon__Amazon_Research_Item__c> amazonResearchItemList = new List<eCommazon__Amazon_Research_Item__c>();
+
+		Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new MockAPI());
+		
+        database.batchablecontext bc;
+        amazonResearchItemList.add(amzresrchitem);
+        BatchAmazonResItemScrapingCA bamr = new BatchAmazonResItemScrapingCA();
+        bamr.AmznReserchItemList.addAll(amazonResearchItemList);
+        bamr.start(bc);
+        bamr.execute(bc, amazonResearchItemList);
+        bamr.finish(bc);
+        bamr.UpdateProductInfo('This String Contains Ships from and sold by Amazon.com.',amzresrchitem);
+        bamr.UpdateProductInfo('This String Contains <span class="a-size-small mbcMerchantName">Amazon.com</span>',amzresrchitem);
+        bamr.UpdateProductInfo('This String does not Contain anything.',amzresrchitem); 
+        bamr.ProductInfo('B005GYFX3Y');
+        
+        Test.stopTest();
+    }
+    
+    testMethod static void test42() {
+        Account a = new Account();
+        a.Name = 'test';
+        insert a;
+            
+        Contact con = New Contact();
+        con.LastName = 'Pending';
+        con.FirstName = 'FBA Shipment';
+        Insert con;
+    
+        Amazon_Setting__c testSetting = new Amazon_Setting__c();
+        testSetting.eCommazon__Amazon_Site__c = 'CA';
+        testSetting.eCommazon__Merchant_Id__c = 'testMerchantId';
+        testSetting.eCommazon__Account__c = a.id;
+        testSetting.eCommazon__FBA_Ship_From_Address__c = con.id;
+        testSetting.Enabled__c=true;
+        insert testSetting; 
+        
+        eCommazon__Amazon_Research__c amzrsch = new eCommazon__Amazon_Research__c();
+        amzrsch.name = 'Amazon Research';
+        Insert amzrsch;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem.Name = 'Amazon Research Items';
+        amzresrchitem.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem.eCommazon__ASIN__c = 'B005GYFX3Y';
+        Insert amzresrchitem;
+       
+        List<eCommazon__Amazon_Research_Item__c> amazonResearchItemList = new List<eCommazon__Amazon_Research_Item__c>();
+		
+		Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new MockAPI());
+		
+        database.batchablecontext bc;
+        amazonResearchItemList.add(amzresrchitem);
+        BatchAmazonResItemScrapingCA bamr = new BatchAmazonResItemScrapingCA();
+        bamr.AmazonResearchId = amzrsch.id;
+        bamr.start(bc);
+        bamr.finish(bc);
+        bamr.UpdateProductInfo('This String Contains Ships from and sold by Amazon.com.',amzresrchitem);
+        bamr.UpdateProductInfo('This String Contains <span class="a-size-small mbcMerchantName">Amazon.com</span>',amzresrchitem);
+        bamr.UpdateProductInfo('This String does not Contain anything.',amzresrchitem); 
+        
+        Test.stopTest();
+    }
+    
+    //End Test Method BatchAmazonResItemScrapingCA Class.................
+	testMethod static void test43() {
+        Account a = new Account();
+        a.Name = 'test';
+        insert a;
+            
+        Contact con = New Contact();
+        con.LastName = 'Pending';
+        con.FirstName = 'FBA Shipment';
+        Insert con;
+    
+        Amazon_Setting__c testSetting = new Amazon_Setting__c();
+        testSetting.eCommazon__Amazon_Site__c = 'CA';
+        testSetting.eCommazon__Merchant_Id__c = 'testMerchantId';
+        testSetting.eCommazon__Account__c = a.id;
+        testSetting.eCommazon__FBA_Ship_From_Address__c = con.id;
+        testSetting.Enabled__c=true;
+        insert testSetting; 
+        
+        eCommazon__Amazon_Research__c amzrsch = new eCommazon__Amazon_Research__c();
+        amzrsch.name = 'Amazon Research';
+        Insert amzrsch;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem.Name = 'Amazon Research Items';
+        amzresrchitem.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem.eCommazon__UPC__c = 'B005GYFX3Y';
+        amzresrchitem.eCommazon__Last_Research_FBA_CA__c = System.now();
+        Insert amzresrchitem;
+        
+        String Response ='<?xml version="1.0"?>'+
+                            '<GetMatchingProductForIdResponse xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01">'+
+                            '<GetMatchingProductForIdResult Id="B005GYFX3Y"  IdType="UPC"  status="Success">'+
+                             '<Products xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01" xmlns:ns2="http://mws.amazonservices.ca/schema/Products/2011-10-01/default.xsd">'+
+                                '<Product>'+
+                                  '<Identifiers>'+
+                                    '<MarketplaceASIN>'+
+                                      '<MarketplaceId>ATVPDKIKX0DER</MarketplaceId>'+
+                                      '<ASIN>059035342X</ASIN>'+
+                                    '</MarketplaceASIN>'+
+                                 ' </Identifiers>'+
+                                 ' <AttributeSets>'+
+                                    '<ns2:ItemAttributes xml:lang="en-US">'+
+                                      '<ns2:Author>Rowling, J.K.</ns2:Author>'+
+                                     ' <ns2:Binding>Paperback</ns2:Binding>'+
+                                      '<ns2:Brand>Scholastic Press</ns2:Brand>'+
+                                     ' <ns2:Creator Role="Illustrator">GrandPré, Mary</ns2:Creator>'+
+                                     ' <ns2:Edition>1st</ns2:Edition>'+
+                                     '<ns2:Feature>Grill great ribs with the durable heavy gauge stainless steel</ns2:Feature>'+
+                                     '<ns2:Feature>Rejoice for a longer lasting rack due to the metal construction with anti-rust surface</ns2:Feature>'+
+                                     '<ns2:Feature>Efficient upright design saves space and gives extra room on grill top</ns2:Feature>'+
+                                     '<ns2:Feature>Save time by grilling multiple ribs at a time; the rib rack can hold up to 7 ribs</ns2:Feature>'+
+                                     '<ns2:Feature>Non-stick coating makes grilling more convenient and cleaning easier</ns2:Feature>'+
+                                     ' <ns2:ItemDimensions>'+
+                                       '<ns2:Height Units="inches">0.80</ns2:Height>'+
+                                       '<ns2:Length Units="inches">7.50</ns2:Length>'+
+                                       '<ns2:Width Units="inches">5.20</ns2:Width>'+
+                                       '<ns2:Weight Units="pounds">0.50</ns2:Weight>'+
+                                     ' </ns2:ItemDimensions>'+
+                                     ' <ns2:IsAutographed>false</ns2:IsAutographed>'+
+                                     ' <ns2:IsMemorabilia>false</ns2:IsMemorabilia>'+
+                                     ' <ns2:Label>Scholastic Paperbacks</ns2:Label>'+
+                                     ' <ns2:Languages>'+
+                                       ' <ns2:Language>'+
+                                          '<ns2:Name>english</ns2:Name>'+
+                                         ' <ns2:Type>Unknown</ns2:Type>'+
+                                       ' </ns2:Language>'+
+                                       ' <ns2:Language>'+
+                                         ' <ns2:Name>english</ns2:Name>'+
+                                         ' <ns2:Type>Original Language</ns2:Type>'+
+                                       ' </ns2:Language>'+
+                                       ' <ns2:Language>'+
+                                          '<ns2:Name>english</ns2:Name>'+
+                                         ' <ns2:Type>Published</ns2:Type>'+
+                                       ' </ns2:Language>'+
+                                     ' </ns2:Languages>'+
+                                     ' <ns2:ListPrice>'+
+                                       ' <ns2:Amount>10.99</ns2:Amount>'+
+                                       ' <ns2:CurrencyCode>USD</ns2:CurrencyCode>'+
+                                     ' </ns2:ListPrice>'+
+                                      '<ns2:Manufacturer>Scholastic Paperbacks</ns2:Manufacturer>'+
+                                      '<ns2:NumberOfItems>1</ns2:NumberOfItems>'+
+                                      '<ns2:NumberOfPages>320</ns2:NumberOfPages>'+
+                                      '<ns2:PackageDimensions>'+
+                                       '<ns2:Height Units="inches">1.00</ns2:Height>'+
+                                        '<ns2:Length Units="inches">7.50</ns2:Length>'+
+                                        '<ns2:Width Units="inches">5.20</ns2:Width>'+
+                                        '<ns2:Weight Units="pounds">0.50</ns2:Weight>'+
+                                     ' </ns2:PackageDimensions>'+
+                                      '<ns2:PackageQuantity>1</ns2:PackageQuantity>'+
+                                      '<ns2:PartNumber>9780590353427</ns2:PartNumber>'+
+                                      '<ns2:ProductGroup>Book</ns2:ProductGroup>'+
+                                      '<ns2:ProductTypeName>ABIS_BOOK</ns2:ProductTypeName>'+
+                                      '<ns2:PublicationDate>1999-10-01</ns2:PublicationDate>'+
+                                     ' <ns2:Publisher>Scholastic Paperbacks</ns2:Publisher>'+
+                                      '<ns2:ReleaseDate>1999-09-08</ns2:ReleaseDate>'+
+                                     ' <ns2:SmallImage>'+
+                                       ' <ns2:URL>'+
+                                         ' http://ecx.images-amazon.com/images/I/51MU5VilKpL._SL75_.jpg'+
+                                        '</ns2:URL>'+
+                                       ' <ns2:Height Units="pixels">75</ns2:Height>'+
+                                       ' <ns2:Width Units="pixels">51</ns2:Width>'+
+                                     ' </ns2:SmallImage>'+
+                                     ' <ns2:Studio>Scholastic Paperbacks</ns2:Studio>'+
+                                     ' <ns2:Title>Harry Potter and the Sorcerer\'s Stone (Book 1)</ns2:Title>'+
+                                   ' </ns2:ItemAttributes>'+
+                                 ' </AttributeSets>'+
+                                 ' <Relationships/>'+
+                                '  <SalesRankings>'+
+                                   ' <SalesRank>'+
+                                     ' <ProductCategoryId>book_display_on_website</ProductCategoryId>'+
+                                     ' <Rank>401</Rank>'+
+                                   ' </SalesRank>'+
+                                   ' <SalesRank>'+
+                                     ' <ProductCategoryId>15356791</ProductCategoryId>'+
+                                     ' <Rank>5</Rank>'+
+                                   ' </SalesRank>'+
+                                   ' <SalesRank>'+
+                                      '<ProductCategoryId>3153</ProductCategoryId>'+
+                                      '<Rank>8</Rank>'+
+                                   ' </SalesRank>'+
+                                   ' <SalesRank>'+
+                                     ' <ProductCategoryId>17468</ProductCategoryId>'+
+                                     ' <Rank>16</Rank>'+
+                                   ' </SalesRank>'+
+                                 ' </SalesRankings>'+
+                                '</Product>'+
+                              '</Products>'+
+                            '</GetMatchingProductForIdResult>'+
+                            '<ResponseMetadata>'+
+                             '<RequestId>3b805a12-689a-4367-ba86-EXAMPLE91c0b</RequestId>'+
+                            '</ResponseMetadata>'+
+                            '</GetMatchingProductForIdResponse>';
+                        
+		Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new MockAPI());                   
+        
+        
+        List<eCommazon__Amazon_Research_Item__c> amazonResearchItemList = new List<eCommazon__Amazon_Research_Item__c>();
+        database.batchablecontext bc;
+        amazonResearchItemList.add(amzresrchitem);
+        BatchGetMatchingProductForIdsCA bamr = new BatchGetMatchingProductForIdsCA();
+        bamr.AsinValues.add('B005GYFX3Y');
+        bamr.AmzResearchItem = amzresrchitem; 
+        bamr.AmznReserchItemList.addAll(amazonResearchItemList);
+        id batchprocessOrder = Database.executebatch(bamr,1);
+        
+        //bamr.ParseGetMatchingProductResponse(Response);
+        
+        Test.stopTest();
+    }
+    
+    testMethod static void test44() {
+        Account a = new Account();
+        a.Name = 'test';
+        insert a;
+            
+        Contact con = New Contact();
+        con.LastName = 'Pending';
+        con.FirstName = 'FBA Shipment';
+        Insert con;
+    
+        Amazon_Setting__c testSetting = new Amazon_Setting__c();
+        testSetting.eCommazon__Amazon_Site__c = 'CA';
+        testSetting.eCommazon__Merchant_Id__c = 'testMerchantId';
+        testSetting.eCommazon__Account__c = a.id;
+        testSetting.eCommazon__FBA_Ship_From_Address__c = con.id;
+        testSetting.Enabled__c=true;
+        insert testSetting; 
+        
+        eCommazon__Amazon_Research__c amzrsch = new eCommazon__Amazon_Research__c();
+        amzrsch.name = 'Amazon Research';
+        Insert amzrsch;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem.Name = 'Amazon Research Items';
+        amzresrchitem.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem.eCommazon__UPC__c = 'B005GYFX3Y';
+        //amzresrchitem.eCommazon__Last_Research_FBA_CA__c = System.now();
+        Insert amzresrchitem;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem2 = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem2.Name = 'Amazon Research Items';
+        amzresrchitem2.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem2.eCommazon__ASIN__c = 'B005GYFX3Y';
+        //amzresrchitem2.eCommazon__Last_Research_FBA_CA__c = System.now();
+        Insert amzresrchitem2;
+        
+        String Response2 = '<?xml version="1.0"?>'+
+                            '<GetCompetitivePricingForASINResponse xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01">'+
+                                '<GetCompetitivePricingForASINResult ASIN="B005GYFX3Y" status="Success">'+
+                                    '<Product xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01" xmlns:ns2="http://mws.amazonservices.ca/schema/Products/2011-10-01/default.xsd">'+
+                                        '<Identifiers>'+
+                                            '<MarketplaceASIN><MarketplaceId>ATVPDKIKX0DER</MarketplaceId><ASIN>B005GYFX3Y</ASIN></MarketplaceASIN>'+
+                                        '</Identifiers>'+
+                                        '<CompetitivePricing>'+
+                                            '<CompetitivePrices>'+
+                                                '<CompetitivePrice belongsToRequester="false" condition="New" subcondition="New">'+
+                                                    '<CompetitivePriceId>1</CompetitivePriceId>'+
+                                                    '<Price>'+
+                                                        '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></LandedPrice>'+
+                                                        '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></ListingPrice>'+
+                                                        '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                                    '</Price>'+
+                                                '</CompetitivePrice>'+
+                                                '<CompetitivePrice belongsToRequester="false" condition="Used" subcondition="Mint">'+
+                                                    '<CompetitivePriceId>2</CompetitivePriceId>'+
+                                                    '<Price>'+
+                                                        '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>18.76</Amount></LandedPrice>'+
+                                                        '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>18.76</Amount></ListingPrice>'+
+                                                        '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                                    '</Price>'+
+                                                '</CompetitivePrice>'+
+                                            '</CompetitivePrices>'+
+                                            '<NumberOfOfferListings>'+
+                                                '<OfferListingCount condition="Any">11</OfferListingCount>'+
+                                                '<OfferListingCount condition="Used">1</OfferListingCount>'+
+                                                '<OfferListingCount condition="New">10</OfferListingCount>'+
+                                            '</NumberOfOfferListings>'+
+                                        '</CompetitivePricing>'+
+                                        '<SalesRankings>'+
+                                            '<SalesRank><ProductCategoryId>lawn_and_garden_display_on_website</ProductCategoryId><Rank>74660</Rank></SalesRank>'+
+                                            '<SalesRank><ProductCategoryId>home_garden_display_on_website</ProductCategoryId><Rank>310835</Rank></SalesRank>'+
+                                        '</SalesRankings>'+
+                                    '</Product>'+
+                               '</GetCompetitivePricingForASINResult>'+
+                              '<ResponseMetadata><RequestId>a0fdeeb4-e8aa-4a0d-9da8-cc215590a7cc</RequestId></ResponseMetadata>'+
+                            '</GetCompetitivePricingForASINResponse>';  
+
+		 Test.startTest();
+		 Test.setMock(HttpCalloutMock.class, new MockAPI());
+		
+         List<eCommazon__Amazon_Research_Item__c> amazonResearchItemList = new List<eCommazon__Amazon_Research_Item__c>();
+         database.batchablecontext bc;
+         amazonResearchItemList.add(amzresrchitem);
+         //amazonResearchItemList.add(amzresrchitem2);
+         BatchGetMatchingProductForIdsCA bamr = new BatchGetMatchingProductForIdsCA();
+         //bamr.AmznReserchItemList = amazonResearchItemList;
+         bamr.MapCompetitivePricing.put('B005GYFX3Y',amzresrchitem2);
+         bamr.AsinValues.add('B005GYFX3Y');
+         bamr.AmazonResearchId = amzrsch.id; 
+         id batchprocessOrder = Database.executebatch(bamr,1);
+         //bamr.ParsegetCompetitivePricing(Response2);
+         
+         Test.stopTest();
+    }
+    
+    testMethod static void test45() {
+        Account a = new Account();
+        a.Name = 'test';
+        insert a;
+            
+        Contact con = New Contact();
+        con.LastName = 'Pending';
+        con.FirstName = 'FBA Shipment';
+        Insert con;
+    
+        Amazon_Setting__c testSetting = new Amazon_Setting__c();
+        testSetting.eCommazon__Amazon_Site__c = 'CA';
+        testSetting.eCommazon__Merchant_Id__c = 'testMerchantId';
+        testSetting.eCommazon__Account__c = a.id;
+        testSetting.eCommazon__FBA_Ship_From_Address__c = con.id;
+        testSetting.Enabled__c=true;
+        insert testSetting; 
+        
+        eCommazon__Amazon_Research__c amzrsch = new eCommazon__Amazon_Research__c();
+        amzrsch.name = 'Amazon Research';
+        Insert amzrsch;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem2 = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem2.Name = 'Amazon Research Items';
+        amzresrchitem2.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem2.eCommazon__ASIN__c = 'B005GYFX3Y';
+        //amzresrchitem2.eCommazon__Last_Research_FBA_CA__c = System.now();
+        Insert amzresrchitem2;  
+        
+        String Response3 = '<?xml version="1.0"?>'+
+            '<GetLowestOfferListingsForASINResponse xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01">'+
+                '<GetLowestOfferListingsForASINResult ASIN="B005GYFX3Y" status="Success">'+
+                    '<AllOfferListingsConsidered>true</AllOfferListingsConsidered>'+
+                    '<Product xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01" xmlns:ns2="http://mws.amazonservices.ca/schema/Products/2011-10-01/default.xsd">'+
+                        '<Identifiers>'+
+                            '<MarketplaceASIN><MarketplaceId>ATVPDKIKX0DER</MarketplaceId><ASIN>B005GYFX3Y</ASIN></MarketplaceASIN>'+
+                        '</Identifiers>'+
+                        '<LowestOfferListings>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>New</ItemCondition>'+
+                                    '<ItemSubcondition>New</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Amazon</FulfillmentChannel>'+
+                                    '<ShipsDomestically>True</ShipsDomestically>'+
+                                    '<ShippingTime><Max>0-2 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>95-97%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>1</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>4534</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>New</ItemCondition>'+
+                                    '<ItemSubcondition>New</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Amazon</FulfillmentChannel>'+
+                                    '<ShipsDomestically>True</ShipsDomestically>'+
+                                    '<ShippingTime><Max>0-2 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>98-100%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>5</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>36240</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>Used</ItemCondition>'+
+                                    '<ItemSubcondition>Mint</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Amazon</FulfillmentChannel>'+
+                                    '<ShipsDomestically>True</ShipsDomestically>'+
+                                    '<ShippingTime><Max>0-2 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>80-89%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>1</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>2233518</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>18.76</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>18.76</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>New</ItemCondition>'+
+                                    '<ItemSubcondition>New</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Amazon</FulfillmentChannel>'+
+                                    '<ShipsDomestically>True</ShipsDomestically>'+
+                                    '<ShippingTime><Max>0-2 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>90-94%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>1</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>4851</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>19.50</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>19.50</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>New</ItemCondition>'+
+                                    '<ItemSubcondition>New</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Merchant</FulfillmentChannel>'+
+                                    '<ShipsDomestically>True</ShipsDomestically>'+
+                                    '<ShippingTime><Max>0-2 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>95-97%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>1</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>632</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>22.99</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>5.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>New</ItemCondition>'+
+                                    '<ItemSubcondition>New</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Merchant</FulfillmentChannel>'+
+                                    '<ShipsDomestically>Unknown</ShipsDomestically>'+
+                                    '<ShippingTime><Max>3-7 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>90-94%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>1</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>4504</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>23.65</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>23.65</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>0.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                            '<LowestOfferListing>'+
+                                '<Qualifiers>'+
+                                    '<ItemCondition>New</ItemCondition>'+
+                                    '<ItemSubcondition>New</ItemSubcondition>'+
+                                    '<FulfillmentChannel>Merchant</FulfillmentChannel>'+
+                                    '<ShipsDomestically>Unknown</ShipsDomestically>'+
+                                    '<ShippingTime><Max>8-13 days</Max></ShippingTime>'+
+                                    '<SellerPositiveFeedbackRating>95-97%</SellerPositiveFeedbackRating>'+
+                                '</Qualifiers>'+
+                                '<NumberOfOfferListingsConsidered>1</NumberOfOfferListingsConsidered>'+
+                                '<SellerFeedbackCount>10880</SellerFeedbackCount>'+
+                                '<Price>'+
+                                    '<LandedPrice><CurrencyCode>USD</CurrencyCode><Amount>25.99</Amount></LandedPrice>'+
+                                    '<ListingPrice><CurrencyCode>USD</CurrencyCode><Amount>17.99</Amount></ListingPrice>'+
+                                    '<Shipping><CurrencyCode>USD</CurrencyCode><Amount>8.00</Amount></Shipping>'+
+                                '</Price>'+
+                                '<MultipleOffersAtLowestPrice>False</MultipleOffersAtLowestPrice>'+
+                            '</LowestOfferListing>'+
+                        '</LowestOfferListings>'+
+                    '</Product>'+ 
+                '</GetLowestOfferListingsForASINResult>'+
+                '<ResponseMetadata><RequestId>166adfcf-456b-4bb0-a74f-faea2230ac1a</RequestId></ResponseMetadata>'+
+            '</GetLowestOfferListingsForASINResponse>';
+
+		    Test.startTest();
+		    Test.setMock(HttpCalloutMock.class, new MockAPI());
+		
+            List<eCommazon__Amazon_Research_Item__c> amazonResearchItemList = new List<eCommazon__Amazon_Research_Item__c>();
+            database.batchablecontext bc;
+            amazonResearchItemList.add(amzresrchitem2);
+            
+            BatchGetMatchingProductForIdsCA bamr = new BatchGetMatchingProductForIdsCA();
+            //bamr.AmznReserchItemList = amazonResearchItemList;
+            bamr.MapCompetitivePricing.put('B005GYFX3Y',amzresrchitem2);
+            bamr.AsinValues.add('B005GYFX3Y');
+            bamr.AmazonResearchId = amzrsch.id;
+            id batchprocessOrder = Database.executebatch(bamr,1);
+            //bamr.ParseGetLowestOfferListingsForASIN(Response3);
+            
+            Test.stopTest();
+    }
+    
+    testMethod static void test46() {
+        Account a = new Account();
+        a.Name = 'test';
+        insert a;
+            
+        Contact con = New Contact();
+        con.LastName = 'Pending';
+        con.FirstName = 'FBA Shipment';
+        Insert con;
+    
+        Amazon_Setting__c testSetting = new Amazon_Setting__c();
+        testSetting.eCommazon__Amazon_Site__c = 'CA';
+        testSetting.eCommazon__Merchant_Id__c = 'testMerchantId';
+        testSetting.eCommazon__Account__c = a.id;
+        testSetting.eCommazon__FBA_Ship_From_Address__c = con.id;
+        testSetting.Enabled__c=true;
+        insert testSetting; 
+        
+        eCommazon__Amazon_Research__c amzrsch = new eCommazon__Amazon_Research__c();
+        amzrsch.name = 'Amazon Research';
+        Insert amzrsch;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem.Name = 'Amazon Research Items';
+        amzresrchitem.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem.eCommazon__UPC__c = 'B005GYFX3Y';
+        //amzresrchitem.eCommazon__Last_Research_FBA_CA__c = System.now();
+        Insert amzresrchitem;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem2 = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem2.Name = 'Amazon Research Items';
+        amzresrchitem2.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem2.eCommazon__ASIN__c = 'B005GYFX3Y';
+        //amzresrchitem2.eCommazon__Last_Research_FBA_CA__c = System.now();
+        Insert amzresrchitem2;  
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem3 = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem3.Name = 'Amazon Research Items';
+        amzresrchitem3.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem3.eCommazon__ASIN__c = 'B005GYFX3Y';
+        amzresrchitem3.eCommazon__Amazon_API_Research_Complete_FBA_CA__c = True;
+        Insert amzresrchitem3;
+        
+        String Response ='<?xml version="1.0"?>'+
+                            '<GetMatchingProductForIdResponse xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01">'+
+                            '<GetMatchingProductForIdResult Id="B005GYFX3Y"  IdType="UPC"  status="Success">'+
+                             '<Products xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01" xmlns:ns2="http://mws.amazonservices.ca/schema/Products/2011-10-01/default.xsd">'+
+                                '<Product>'+
+                                  '<Identifiers>'+
+                                    '<MarketplaceASIN>'+
+                                      '<MarketplaceId>ATVPDKIKX0DER</MarketplaceId>'+
+                                      '<ASIN>059035342X</ASIN>'+
+                                    '</MarketplaceASIN>'+
+                                 ' </Identifiers>'+
+                                 ' <AttributeSets>'+
+                                    '<ns2:ItemAttributes xml:lang="en-US">'+
+                                     ' <ns2:Title>Harry Potter and the Sorcerer\'s Stone (Book 1)</ns2:Title>'+
+                                   ' </ns2:ItemAttributes>'+
+                                 ' </AttributeSets>'+
+                                 ' <Relationships/>'+
+                               '</Product>'+
+                              '</Products>'+
+                            '</GetMatchingProductForIdResult>'+
+                            '<ResponseMetadata>'+
+                             '<RequestId>3b805a12-689a-4367-ba86-EXAMPLE91c0b</RequestId>'+
+                            '</ResponseMetadata>'+
+                            '</GetMatchingProductForIdResponse>';
+      
+       String Response2 ='<?xml version="1.0"?>'+
+                          '<GetMatchingProductForIdResponse xmlns="http://mws.amazonservices.ca/schema/Products/2011-10-01"><GetMatchingProductForIdResult Id="B005GYFX3Y"  IdType="UPC"  status="Client Error"><Error><Type>Sender</Type><Code>InvalidParameterValue</Code><Message>Invalid ASIN identifier B00VPO5XNO for marketplace ATVPDKIKX0DER</Message></Error></GetMatchingProductForIdResult><ResponseMetadata><RequestId>0843c159-38bb-4530-8173-408c3fb2cec0</RequestId></ResponseMetadata></GetMatchingProductForIdResponse>';
+        
+        Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new MockAPI());
+		  
+        List<eCommazon__Amazon_Research_Item__c> amazonResearchItemList = new List<eCommazon__Amazon_Research_Item__c>();
+        database.batchablecontext bc;
+        amazonResearchItemList.add(amzresrchitem);
+        BatchGetMatchingProductForIdsCA bamr = new BatchGetMatchingProductForIdsCA();
+        bamr.AsinValues.add('B005GYFX3Y');
+        //bamr.AmzResearchItem = amzresrchitem;
+        bamr.AmazonResearchId = amzrsch.id;
+        //bamr.AmznReserchItemList.addAll(amazonResearchItemList);
+        bamr.start(bc);
+        bamr.execute(bc, amazonResearchItemList);
+        bamr.finish(bc);
+        id batchprocessOrder = Database.executebatch(bamr,1);
+        bamr.ParseGetMatchingProductResponse(Response);
+        bamr.ParseGetMatchingProductResponse(Response2);
+        
+        Test.stopTest();
+    }
+	
+	testMethod static void test25() { 
+    	Account a = new Account();
+        a.Name = 'test';
+        insert a;
+            
+        Contact con = New Contact();
+        con.LastName = 'Pending';
+        con.FirstName = 'FBA Shipment';
+        Insert con;
+    
+        Amazon_Setting__c testSetting = new Amazon_Setting__c();
+        testSetting.eCommazon__Amazon_Site__c = 'CA';
+        testSetting.eCommazon__Merchant_Id__c = 'testMerchantId';
+        testSetting.eCommazon__Account__c = a.id;
+        testSetting.eCommazon__FBA_Ship_From_Address__c = con.id;
+        testSetting.Enabled__c=true;
+        insert testSetting; 
+        
+        eCommazon__Amazon_Research__c amzrsch = new eCommazon__Amazon_Research__c();
+        amzrsch.name = 'Amazon Research';
+        Insert amzrsch;
+        
+        eCommazon__Amazon_Research_Item__c amzresrchitem = New eCommazon__Amazon_Research_Item__c();
+        amzresrchitem.Name = 'Amazon Research Items';
+        amzresrchitem.eCommazon__Amazon_Research__c = amzrsch.Id;
+        amzresrchitem.eCommazon__UPC__c = '53535fdg53';
+        amzresrchitem.eCommazon__Last_Research_FBA_CA__c = System.now();
+        Insert amzresrchitem;
+
+		Test.startTest();
+		Test.setMock(HttpCalloutMock.class, new MockAPI());
+		
+        List<eCommazon__Amazon_Research_Item__c> amazonResearchItemList = new List<eCommazon__Amazon_Research_Item__c>();
+        database.batchablecontext bc;
+        amazonResearchItemList.add(amzresrchitem);
+        //amazonResearchItemList.add(amzresrchitem2);
+        BatchMakeLastResearchNullCA bmlr = New BatchMakeLastResearchNullCA();
+        bmlr.AmznReserchItemList.addAll(amazonResearchItemList);
+        bmlr.AmazonResearchId = amzrsch.id;
+        Database.executebatch(bmlr,1); 
+        Test.stopTest();
+   }
